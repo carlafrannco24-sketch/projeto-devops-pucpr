@@ -1,0 +1,35 @@
+name: CI - Validacao do site
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  validar-site:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v6
+
+      - name: Verificar arquivos obrigatorios
+        run: |
+          test -f index.html
+          test -f styles.css
+          test -f script.js
+
+      - name: Verificar titulo da loja
+        run: grep -q "Halloween Store" index.html
+
+      - name: Verificar CSS
+        run: grep -q "styles.css" index.html
+
+      - name: Verificar JavaScript
+        run: grep -q "script.js" index.html
+
+      - name: CI concluido
+        run: echo "Validacao realizada com sucesso!"
