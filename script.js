@@ -1,3 +1,8 @@
+function deveExibirProduto(categoriaSelecionada, categoriaProduto) {
+    return categoriaSelecionada === "todos" ||
+           categoriaSelecionada === categoriaProduto;
+}
+
 function filtrarProdutos(categoria) {
 
     const produtos = document.querySelectorAll(".produto");
@@ -6,7 +11,7 @@ function filtrarProdutos(categoria) {
 
         const categoriaProduto = produto.dataset.categoria;
 
-        if (categoria === "todos" || categoriaProduto === categoria) {
+        if (deveExibirProduto(categoria, categoriaProduto)) {
             produto.style.display = "block";
         } else {
             produto.style.display = "none";
@@ -14,4 +19,8 @@ function filtrarProdutos(categoria) {
 
     });
 
+}
+
+if (typeof module !== "undefined") {
+    module.exports = { deveExibirProduto };
 }
