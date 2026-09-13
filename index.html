@@ -28,7 +28,27 @@
             </p>
         </section>
 
-        <section class="produtos">
+        <section class="filtros">
+
+    <button onclick="filtrarProdutos('todos')">
+        Todos
+    </button>
+
+    <button onclick="filtrarProdutos('fantasia')">
+        Fantasias
+    </button>
+
+    <button onclick="filtrarProdutos('decoracao')">
+        Decorações
+    </button>
+
+    <button onclick="filtrarProdutos('acessorio')">
+        Acessórios
+    </button>
+
+</section>
+        
+<section class="produtos">
 
             <article class="produto" data-categoria="fantasia">
                 <span class="emoji">🧙‍♀️</span>
@@ -75,6 +95,6 @@
         </section>
 
     </main>
-
+<script src="script.js"></script>
 </body>
 </html>
