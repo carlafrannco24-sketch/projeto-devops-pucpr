@@ -1,0 +1,36 @@
+name: CD - GitHub Pages
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  preparar-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v6
+
+      - name: Verificar site
+        run: |
+          test -f index.html
+          test -f styles.css
+          test -f script.js
+
+      - name: Preparar site para entrega
+        run: echo "Site preparado para entrega com sucesso!"
+
+      - name: Upload do site
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: '.'
