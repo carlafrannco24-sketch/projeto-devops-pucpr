@@ -21,16 +21,31 @@ jobs:
       - name: Baixar codigo
         uses: actions/checkout@v6
 
-      - name: Verificar site
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Verificar arquivos do site
         run: |
           test -f index.html
           test -f styles.css
           test -f script.js
 
-      - name: Preparar site para entrega
-        run: echo "Site preparado para entrega com sucesso!"
-
       - name: Upload do site
         uses: actions/upload-pages-artifact@v4
         with:
           path: '.'
+
+  deploy:
+    if: github.event_name == 'push'
+    needs: preparar-deploy
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
