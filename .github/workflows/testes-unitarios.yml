@@ -1,0 +1,22 @@
+name: Testes Unitarios
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Executar testes unitarios
+        run: node --test script.test.js
